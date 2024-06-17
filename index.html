@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معادلات رياضية لعلم الدواجن</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9ffea; /* أخضر فاتح جدًا */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+	 text-align: right;
+}
+
+.header {
+    background-color: #fff8dc; /* لون الحواف: أصفر ذهبي */
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    border-bottom: 5px solid #f9ffea;
+	
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border: 5px solid #fff8dc;
+    margin: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+	 text-align: right;
+}
+
+select, input {
+    font-size: 18px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    box-sizing: border-box;
+	 text-align: right;
+}
+
+.result {
+    font-size: 20px;
+    margin: 20px 0;
+    color: #333;
+    background-color: #fff8dc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+	 text-align: right;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+	   <h1>تصميم م. عبدالله عزوز واتس 01119935714</h1>
+        <h1>معادلات رياضية لعلم الدواجن</h1>
+        <label for="equation-select">اختر المعادلة:</label>
+<select id="equation-select" onchange="showEquation()">
+    <option value="">--اختر المعادلة--</option>
+    <option value="volume">حساب حجم العنبر</option>
+    <option value="density">حساب كثافة التسكين</option>
+    <option value="feed">حساب كمية العلف اليومية</option>
+    <option value="ventilation-feed">حساب التهوية الدنيا بناء على العلف المستهلك</option>
+    <option value="ventilation-weight">حساب التهوية الدنيا بناء على الوزن</option>
+    <option value="ventilation-change">حساب التهوية الدنيا بتغيير الهواء</option>
+    <option value="fans-required">حساب المراوح المطلوبة للعنبر</option>
+    <option value="fans-air-speed">حساب عدد المراوح بناءً على سرعة الهواء</option>
+    <option value="cooling-area">حساب مساحة التبريد في العنبر</option>
+    <option value="window-area">حساب مساحة الشبابيك في العنبر</option>
+    <option value="feed-area">حساب المساحة العلفية بالمتر</option>
+    <option value="birds-feeding-chain">حساب عدد الطيور بناءً على المساحة العلفية للجنزير</option>
+    <option value="led-lamps">حساب عدد لمبات الليد في العنبر</option>
+    <option value="washing-water">حساب كمية المياه اللازمة لغسيل العنبر</option>
+    <option value="disinfection-water">حساب كمية المياه اللازمة لتطهير العنبر</option>
+    <option value="drinking-water">حساب كمية مياه الشرب في العنبر</option>
+    <option value="vaccination-water">حساب كمية مياه التحصين في العنبر</option>
+    <option value="antibiotic">حساب كمية المضاد الحيوي</option>
+    <option value="egg-weight">حساب وزن البيض في الأمهات بعد 30 أسبوع</option>
+    <option value="variation-coefficient">حساب معامل التباين</option>
+    <option value="egg-mass">حساب كتلة البيضة</option>
+</select>
+
+
+
+        <div id="equation-volume" style="display:none;">
+            <h2>حساب حجم العنبر</h2>
+            <label for="length">الطول (متر):</label>
+            <input type="number" id="length"><br><br>
+
+            <label for="width">العرض (متر):</label>
+            <input type="number" id="width"><br><br>
+
+            <label for="height">متوسط الارتفاع (متر):</label>
+            <input type="number" id="height"><br><br>
+
+            <button onclick="calculateVolume()">احسب الحجم</button>
+
+            <div class="result" id="result-volume" style="display:none;">
+                <strong>الحجم:</strong> <span id="volume-result"></span> متر مكعب
+            </div>
+        </div>
+
+        <div id="equation-density" style="display:none;">
+            <h2>حساب كثافة التسكين</h2>
+            <label for="length-density">الطول (متر):</label>
+            <input type="number" id="length-density"><br><br>
+
+            <label for="width-density">العرض (متر):</label>
+            <input type="number" id="width-density"><br><br>
+
+            <label for="birds-density">عدد الطيور في المتر المربع:</label>
+            <input type="number" id="birds-density"><br><br>
+
+            <button onclick="calculateDensity()">احسب كثافة التسكين</button>
+
+            <div class="result" id="result-density" style="display:none;">
+                <strong>كثافة التسكين:</strong> <span id="density-result"></span> طير
+            </div>
+        </div>
+
+        <div id="equation-feed" style="display:none;">
+            <h2>حساب كمية العلف اليومية</h2>
+            <label for="birds-feed">عدد الطيور:</label>
+            <input type="number" id="birds-feed"><br><br>
+
+            <label for="age-feed">العمر (بالأيام):</label>
+            <input type="number" id="age-feed"><br><br>
+
+            <button onclick="calculateFeed()">احسب كمية العلف</button>
+
+            <div class="result" id="result-feed" style="display:none;">
+                <strong>كمية العلف اليومية:</strong> <span id="feed-result"></span> كجم
+            </div>
+        </div>
+
+        <div id="equation-ventilation-feed" style="display:none;">
+            <h2>حساب التهوية الدنيا بناء على العلف المستهلك</h2>
+            <label for="feed-ventilation">كمية العلف (بالطن):</label>
+            <input type="number" id="feed-ventilation"><br><br>
+
+            <button onclick="calculateVentilationFeed()">احسب التهوية</button>
+
+            <div class="result" id="result-ventilation-feed" style="display:none;">
+                <strong>التهوية الدنيا:</strong> <span id="ventilation-feed-result"></span> متر مكعب هواء في الدقيقة
+            </div>
+        </div>
+
+        <div id="equation-ventilation-weight" style="display:none;">
+            <h2>حساب التهوية الدنيا بناء على الوزن</h2>
+            <label for="birds-ventilation-weight">عدد الطيور:</label>
+            <input type="number" id="birds-ventilation-weight"><br><br>
+
+            <label for="weight-ventilation">الوزن (كجم):</label>
+            <input type="number" id="weight-ventilation"><br><br>
+
+            <label for="air-ventilation">كمية الهواء (متر مكعب ساعة):</label>
+            <input type="number" id="air-ventilation"><br><br>
+
+            <button onclick="calculateVentilationWeight()">احسب التهوية</button>
+
+            <div class="result" id="result-ventilation-weight" style="display:none;">
+                <strong>التهوية الدنيا:</strong> <span id="ventilation-weight-result"></span> متر مكعب هواء في الساعة
+            </div>
+        </div>
+
+        <div id="equation-ventilation-change" style="display:none;">
+            <h2>حساب التهوية الدنيا بتغيير الهواء</h2>
+            <label for="volume-ventilation">مساحة العنبر (متر مكعب):</label>
+            <input type="number" id="volume-ventilation"><br><br>
+
+            <label for="fan-capacity">قدرة المروحة (متر مكعب في الدقيقة):</label>
+            <input type="number" id="fan-capacity"><br><br>
+
+            <label for="timer-duration">وقت التيمر الكلي (ثوانى):</label>
+            <input type="number" id="timer-duration"><br><br>
+
+            <button onclick="calculateVentilationChange()">احسب التهوية</button>
+
+            <div class="result" id="result-ventilation-change" style="display:none;">
+                <strong>التهوية الدنيا:</strong> <span id="ventilation-change-result"></span> وقت التشغيل بالثوانى
+            </div>
+        </div>
+		
+		<div id="equation-fans-required" style="display:none;">
+    <h2>حساب المراوح المطلوبة للعنبر</h2>
+    <label for="length-fans">الطول (متر):</label>
+    <input type="number" id="length-fans"><br><br>
+
+    <label for="width-fans">العرض (متر):</label>
+    <input type="number" id="width-fans"><br><br>
+
+    <label for="height-fans">الارتفاع (متر):</label>
+    <input type="number" id="height-fans"><br><br>
+
+    <label for="fan-capacity-fans">حجم الهواء الخارج من المروحة في الدقيقة (متر مكعب):</label>
+    <input type="number" id="fan-capacity-fans"><br><br>
+
+    <button onclick="calculateFansRequired()">احسب المراوح المطلوبة</button>
+
+    <div class="result" id="result-fans-required" style="display:none;">
+        <strong>عدد المراوح المطلوبة:</strong> <span id="fans-required-result"></span> مروحة
+    </div>
+</div>
+
+<div id="equation-fans-air-speed" style="display:none;">
+    <h2>حساب عدد المراوح بناءً على سرعة الهواء</h2>
+    <label for="air-speed-fans">سرعة الهواء المطلوبة (متر/ثانية):</label>
+    <input type="number" id="air-speed-fans"><br><br>
+
+    <label for="width-air-speed">العرض (متر):</label>
+    <input type="number" id="width-air-speed"><br><br>
+
+    <label for="height-air-speed">الارتفاع (متر):</label>
+    <input type="number" id="height-air-speed"><br><br>
+
+    <label for="fan-capacity-per-second">حجم الهواء الخارج من المروحة في الثانية الواحدة (متر مكعب):</label>
+    <input type="number" id="fan-capacity-per-second"><br><br>
+
+    <button onclick="calculateFansAirSpeed()">احسب عدد المراوح</button>
+
+    <div class="result" id="result-fans-air-speed" style="display:none;">
+        <strong>عدد المراوح المطلوبة:</strong> <span id="fans-air-speed-result"></span> مروحة
+    </div>
+</div>
+
+<div id="equation-cooling-area" style="display:none;">
+    <h2>حساب مساحة التبريد في العنبر</h2>
+    <label for="fan-capacity-per-second-cooling">حجم الهواء الخارج من المروحة في الثانية (متر مكعب):</label>
+    <input type="number" id="fan-capacity-per-second-cooling"><br><br>
+
+    <label for="number-of-fans-cooling">عدد المراوح:</label>
+    <input type="number" id="number-of-fans-cooling"><br><br>
+
+    <label for="air-speed-cooling-pad">سرعة الهواء الخارج من ورق التبريد (متر/ثانية):</label>
+    <input type="number" id="air-speed-cooling-pad"><br><br>
+
+    <label for="cooling-pad-length">طول ورق التبريد (متر):</label>
+    <input type="number" id="cooling-pad-length"><br><br>
+
+    <button onclick="calculateCoolingArea()">احسب مساحة التبريد</button>
+
+    <div class="result" id="result-cooling-area" style="display:none;">
+        <strong>مساحة التبريد:</strong> <span id="cooling-area-result"></span> متر مربع
+    </div>
+</div>
+<div id="equation-window-area" style="display:none;">
+    <h2>حساب مساحة الشبابيك في العنبر</h2>
+    <label for="num-side-fans">عدد المراوح الجانبية:</label>
+    <input type="number" id="num-side-fans"><br><br>
+
+    <label for="fan-capacity-second">قدرة المروحة (متر مكعب في الثانية):</label>
+    <input type="number" id="fan-capacity-second"><br><br>
+
+    <label for="half-width-window">نصف عرض العنبر:</label>
+    <input type="number" id="half-width-window"><br><br>
+
+    <button onclick="calculateWindowArea()">احسب مساحة الشبابيك</button>
+
+    <div class="result" id="result-window-area" style="display:none;">
+        <strong>مساحة الشبابيك:</strong> <span id="window-area-result"></span> متر مربع
+    </div>
+</div>
+
+<div id="equation-feed-area" style="display:none;">
+    <h2>حساب المساحة العلفية بالمتر</h2>
+    <label for="age-weeks">العمر (بالأسابيع):</label>
+    <input type="number" id="age-weeks"><br><br>
+
+    <label for="num-birds-feed-area">عدد الطيور:</label>
+    <input type="number" id="num-birds-feed-area"><br><br>
+
+    <button onclick="calculateFeedArea()">احسب المساحة العلفية</button>
+
+    <div class="result" id="result-feed-area" style="display:none;">
+        <strong>المساحة العلفية:</strong> <span id="feed-area-result"></span> متر مربع
+    </div>
+</div>
+
+<div id="equation-birds-feeding-chain" style="display:none;">
+    <h2>حساب عدد الطيور بناءً على المساحة العلفية للجنزير</h2>
+    <label for="chain-length">طول الجنزير (متر):</label>
+    <input type="number" id="chain-length"><br><br>
+
+    <label for="num-lines">عدد الخطوط:</label>
+    <input type="number" id="num-lines"><br><br>
+
+    <label for="num-birds-chain">المساحة العلفيه بالسم:</label>
+    <input type="number" id="num-birds-chain"><br><br>
+
+    <button onclick="calculateBirdsFeedingChain()">احسب عدد الطيور</button>
+
+    <div class="result" id="result-birds-feeding-chain" style="display:none;">
+        <strong>عدد الطيور:</strong> <span id="birds-feeding-chain-result"></span> طائر
+    </div>
+</div>
+
+<div id="equation-led-lamps" style="display:none;">
+    <h2>حساب عدد لمبات الليد في العنبر</h2>
+    <label for="area-led">مساحة العنبر (متر مربع):</label>
+    <input type="number" id="area-led"><br><br>
+
+    <label for="required-lux">اللوكس المطلوب:</label>
+    <input type="number" id="required-lux"><br><br>
+
+    <label for="lamp-brightness">شدة إضاءة اللمبة (لومن):</label>
+    <input type="number" id="lamp-brightness"><br><br>
+
+    <label for="lighting-factor">معامل الإضاءة:</label>
+    <input type="number" id="lighting-factor"><br><br>
+
+    <button onclick="calculateLedLamps()">احسب عدد اللمبات</button>
+
+    <div class="result" id="result-led-lamps" style="display:none;">
+        <strong>عدد لمبات الليد المطلوبة:</strong> <span id="led-lamps-result"></span> لمبة
+    </div>
+</div>
+
+<div id="equation-washing-water" style="display:none;">
+    <h2>حساب كمية المياه اللازمة لغسيل العنبر</h2>
+    <label for="volume-washing-water">حجم العنبر (متر مكعب):</label>
+    <input type="number" id="volume-washing-water"><br><br>
+
+    <button onclick="calculateWashingWater()">احسب كمية المياه</button>
+
+    <div class="result" id="result-washing-water" style="display:none;">
+        <strong>كمية المياه اللازمة للغسيل:</strong> <span id="washing-water-result"></span> لتر
+    </div>
+</div>
+
+<div id="equation-disinfection-water" style="display:none;">
+    <h2>حساب كمية المياه اللازمة لتطهير العنبر</h2>
+    <label for="volume-disinfection-water">حجم العنبر (متر مكعب):</label>
+    <input type="number" id="volume-disinfection-water"><br><br>
+
+    <button onclick="calculateDisinfectionWater()">احسب كمية المياه</button>
+
+    <div class="result" id="result-disinfection-water" style="display:none;">
+        <strong>كمية المياه اللازمة للتطهير:</strong> <span id="disinfection-water-result"></span> لتر
+    </div>
+</div>
+
+<div id="equation-drinking-water" style="display:none;">
+    <h2>حساب كمية مياه الشرب في العنبر</h2>
+    <label for="feed-amount">كمية العلف (كجم):</label>
+    <input type="number" id="feed-amount"><br><br>
+
+    <button onclick="calculateDrinkingWater()">احسب كمية مياه الشرب</button>
+
+    <div class="result" id="result-drinking-water" style="display:none;">
+        <strong>كمية مياه الشرب:</strong> <span id="drinking-water-result"></span> لتر
+    </div>
+</div>
+
+<div id="equation-vaccination-water" style="display:none;">
+    <h2>حساب كمية مياه التحصين في العنبر</h2>
+    <label for="feed-amount-vaccination">كمية العلف (كجم):</label>
+    <input type="number" id="feed-amount-vaccination"><br><br>
+
+    <button onclick="calculateVaccinationWater()">احسب كمية مياه التحصين</button>
+
+    <div class="result" id="result-vaccination-water" style="display:none;">
+        <strong>كمية مياه التحصين:</strong> <span id="vaccination-water-result"></span> لتر
+    </div>
+</div>
+
+<div id="equation-antibiotic" style="display:none;">
+    <h2>حساب كمية المضاد الحيوي</h2>
+    <label for="num-birds-antibiotic">عدد الطيور:</label>
+    <input type="number" id="num-birds-antibiotic"><br><br>
+
+    <label for="avg-weight-antibiotic">متوسط الوزن (كجم):</label>
+    <input type="number" id="avg-weight-antibiotic"><br><br>
+
+    <label for="mg-per-kg">مللي جرام لكل كجم:</label>
+    <input type="number" id="mg-per-kg"><br><br>
+
+    <label for="active-ingredient">تركيز المادة الفعالة:</label>
+    <input type="number" id="active-ingredient"><br><br>
+
+    <button onclick="calculateAntibiotic()">احسب كمية المضاد الحيوي</button>
+
+    <div class="result" id="result-antibiotic" style="display:none;">
+        <strong>كمية المضاد الحيوي:</strong> <span id="antibiotic-result"></span> جرام
+    </div>
+</div>
+
+<div id="equation-egg-weight" style="display:none;">
+    <h2>حساب وزن البيض في الأمهات بعد 30 أسبوع</h2>
+    <label for="age-weeks-egg">العمر (بالأسابيع):</label>
+    <input type="number" id="age-weeks-egg"><br><br>
+
+    <button onclick="calculateEggWeight()">احسب وزن البيض</button>
+
+    <div class="result" id="result-egg-weight" style="display:none;">
+        <strong>وزن البيض:</strong> <span id="egg-weight-result"></span> جرام
+    </div>
+</div>
+
+<div id="equation-variation-coefficient" style="display:none;">
+    <h2>حساب معامل التباين</h2>
+    <label for="max-weight">أعلى وزن (كجم):</label>
+    <input type="number" id="max-weight"><br><br>
+
+    <label for="min-weight">أقل وزن (كجم):</label>
+    <input type="number" id="min-weight"><br><br>
+
+    <label for="avg-weight-variation">متوسط الوزن (كجم):</label>
+    <input type="number" id="avg-weight-variation"><br><br>
+
+    <button onclick="calculateVariationCoefficient()">احسب معامل التباين</button>
+
+    <div class="result" id="result-variation-coefficient" style="display:none;">
+        <strong>معامل التباين:</strong> <span id="variation-coefficient-result"></span> %
+    </div>
+</div>
+
+<div id="equation-egg-mass" style="display:none;">
+    <h2>حساب كتلة البيضة</h2>
+    <label for="production-rate">نسبة الإنتاج (%):</label>
+    <input type="number" id="production-rate"><br><br>
+
+    <label for="egg-weight-mass">وزن البيضة (جرام):</label>
+    <input type="number" id="egg-weight-mass"><br><br>
+
+    <button onclick="calculateEggMass()">احسب كتلة البيضة</button>
+
+    <div class="result" id="result-egg-mass" style="display:none;">
+        <strong>كتلة البيضة:</strong> <span id="egg-mass-result"></span> جرام
+    </div>
+</div>
+
+    </div>
+
+    <script>
+	
+          function showEquation() {
+            var select = document.getElementById("equation-select");
+            var forms = document.querySelectorAll('[id^="equation-"]');
+            
+            forms.forEach(function(form) {
+                form.style.display = "none";
+				    select.style.display = "block";
+
+            });
+
+            if (select.value) {
+                document.getElementById("equation-" + select.value).style.display = "block";
+            }
+        }
+
+
+        function calculateVolume() {
+            var length = document.getElementById("length").value;
+            var width = document.getElementById("width").value;
+            var height = document.getElementById("height").value;
+            var volume = length * width * height;
+            document.getElementById("volume-result").innerText = volume;
+            document.getElementById("result-volume").style.display = "block";
+        }
+
+        function calculateDensity() {
+            var length = document.getElementById("length-density").value;
+            var width = document.getElementById("width-density").value;
+            var birds = document.getElementById("birds-density").value;
+            var area = length * width;
+            var density = area * birds;
+            document.getElementById("density-result").innerText = density;
+            document.getElementById("result-density").style.display = "block";
+        }
+
+        function calculateFeed() {
+            var birds = document.getElementById("birds-feed").value;
+            var age = document.getElementById("age-feed").value;
+            var feed = (birds * age * 0.09 * 50)/1000;
+            document.getElementById("feed-result").innerText = feed;
+            document.getElementById("result-feed").style.display = "block";
+        }
+
+        function calculateVentilationFeed() {
+            var feed = document.getElementById("feed-ventilation").value;
+            var ventilation = feed * 120;
+            document.getElementById("ventilation-feed-result").innerText = ventilation;
+            document.getElementById("result-ventilation-feed").style.display = "block";
+        }
+
+        function calculateVentilationWeight() {
+            var birds = document.getElementById("birds-ventilation-weight").value;
+            var weight = document.getElementById("weight-ventilation").value;
+            var air = document.getElementById("air-ventilation").value;
+            var ventilation = birds * weight * air;
+            document.getElementById("ventilation-weight-result").innerText = ventilation;
+            document.getElementById("result-ventilation-weight").style.display = "block";
+        }
+
+        function calculateVentilationChange() {
+            var volume = document.getElementById("volume-ventilation").value;
+            var fanCapacity = document.getElementById("fan-capacity").value;
+            var timerDuration = document.getElementById("timer-duration").value;
+            var ventilation = (volume / 8/fanCapacity) * (timerDuration);
+            document.getElementById("ventilation-change-result").innerText = ventilation;
+            document.getElementById("result-ventilation-change").style.display = "block";
+        }
+		
+		function calculateFansRequired() {
+    var length = document.getElementById("length-fans").value;
+    var width = document.getElementById("width-fans").value;
+    var height = document.getElementById("height-fans").value;
+    var fanCapacity = document.getElementById("fan-capacity-fans").value;
+    var fansRequired = (length * width * height) / fanCapacity;
+    document.getElementById("fans-required-result").innerText = fansRequired;
+    document.getElementById("result-fans-required").style.display = "block";
+}
+
+function calculateFansAirSpeed() {
+    var airSpeed = document.getElementById("air-speed-fans").value;
+    var width = document.getElementById("width-air-speed").value;
+    var height = document.getElementById("height-air-speed").value;
+    var fanCapacityPerSecond = document.getElementById("fan-capacity-per-second").value;
+    var fansAirSpeed = (airSpeed * width * height) / fanCapacityPerSecond;
+    document.getElementById("fans-air-speed-result").innerText = fansAirSpeed;
+    document.getElementById("result-fans-air-speed").style.display = "block";
+}
+
+function calculateCoolingArea() {
+    var fanCapacityPerSecond = document.getElementById("fan-capacity-per-second-cooling").value;
+    var numberOfFans = document.getElementById("number-of-fans-cooling").value;
+    var airSpeedFromCoolingPad = document.getElementById("air-speed-cooling-pad").value;
+    var coolingPadLength = document.getElementById("cooling-pad-length").value;
+    var coolingArea = (fanCapacityPerSecond * numberOfFans) / (airSpeedFromCoolingPad * coolingPadLength);
+    document.getElementById("cooling-area-result").innerText = coolingArea;
+    document.getElementById("result-cooling-area").style.display = "block";
+}
+
+ function calculateWindowArea() {
+    var numSideFans = document.getElementById("num-side-fans").value;
+    var fanCapacitySecond = document.getElementById("fan-capacity-second").value;
+    var halfWidthWindow = document.getElementById("half-width-window").value;
+    var windowArea = (numSideFans * fanCapacitySecond) / (halfWidthWindow );
+    document.getElementById("window-area-result").innerText = windowArea;
+    document.getElementById("result-window-area").style.display = "block";
+}
+
+function calculateFeedArea() {
+    var ageWeeks = document.getElementById("age-weeks").value;
+    var numBirdsFeedArea = document.getElementById("num-birds-feed-area").value;
+    var feedArea = ((parseInt(ageWeeks) + 1) * numBirdsFeedArea) / 100;
+    document.getElementById("feed-area-result").innerText = feedArea;
+    document.getElementById("result-feed-area").style.display = "block";
+}
+
+function calculateBirdsFeedingChain() {
+    var chainLength = document.getElementById("chain-length").value;
+    var numLines = document.getElementById("num-lines").value;
+    var numBirdsChain = document.getElementById("num-birds-chain").value;
+    var birdsFeedingChain = (chainLength * 200 * numLines) / numBirdsChain;
+    document.getElementById("birds-feeding-chain-result").innerText = birdsFeedingChain;
+    document.getElementById("result-birds-feeding-chain").style.display = "block";
+}
+
+function calculateLedLamps() {
+    var areaLed = document.getElementById("area-led").value;
+    var requiredLux = document.getElementById("required-lux").value;
+    var lampBrightness = document.getElementById("lamp-brightness").value;
+    var lightingFactor = document.getElementById("lighting-factor").value;
+    var ledLamps = (areaLed * requiredLux) / (lampBrightness * lightingFactor) / 3;
+    document.getElementById("led-lamps-result").innerText = ledLamps;
+    document.getElementById("result-led-lamps").style.display = "block";
+}
+
+function calculateWashingWater() {
+    var volume = document.getElementById("volume-washing-water").value;
+    var washingWater = volume * 0.5;
+    document.getElementById("washing-water-result").innerText = washingWater;
+    document.getElementById("result-washing-water").style.display = "block";
+}
+
+function calculateDisinfectionWater() {
+    var volume = document.getElementById("volume-disinfection-water").value;
+    var disinfectionWater = volume * 0.3;
+    document.getElementById("disinfection-water-result").innerText = disinfectionWater;
+    document.getElementById("result-disinfection-water").style.display = "block";
+}
+
+function calculateDrinkingWater() {
+    var feedAmount = document.getElementById("feed-amount").value;
+    var drinkingWater = Math.floor(feedAmount * 2.2);
+    document.getElementById("drinking-water-result").innerText = drinkingWater;
+    document.getElementById("result-drinking-water").style.display = "block";
+}
+
+function calculateVaccinationWater() {
+    var feedAmount = document.getElementById("feed-amount-vaccination").value;
+    var vaccinationWater = Math.floor(feedAmount * 2.2 * 0.34);
+    document.getElementById("vaccination-water-result").innerText = vaccinationWater;
+    document.getElementById("result-vaccination-water").style.display = "block";
+}
+
+function calculateAntibiotic() {
+    var numBirds = document.getElementById("num-birds-antibiotic").value;
+    var avgWeight = document.getElementById("avg-weight-antibiotic").value;
+    var mgPerKg = document.getElementById("mg-per-kg").value;
+    var activeIngredient = document.getElementById("active-ingredient").value;
+    var antibiotic = (numBirds * avgWeight * mgPerKg) / (activeIngredient * 10);
+    document.getElementById("antibiotic-result").innerText = antibiotic;
+    document.getElementById("result-antibiotic").style.display = "block";
+}
+
+function calculateEggWeight() {
+    var ageWeeks = document.getElementById("age-weeks-egg").value;
+    var eggWeight = ((ageWeeks - 25) / 2) + 55;
+    document.getElementById("egg-weight-result").innerText = eggWeight;
+    document.getElementById("result-egg-weight").style.display = "block";
+}
+
+function calculateVariationCoefficient() {
+    var maxWeight = document.getElementById("max-weight").value;
+    var minWeight = document.getElementById("min-weight").value;
+    var avgWeight = document.getElementById("avg-weight-variation").value;
+    var variationCoefficient = Math.floor(((maxWeight - minWeight) / (avgWeight * 5.2)) * 100);
+    document.getElementById("variation-coefficient-result").innerText = variationCoefficient;
+    document.getElementById("result-variation-coefficient").style.display = "block";
+}
+
+function calculateEggMass() {
+    var productionRate = document.getElementById("production-rate").value;
+    var eggWeightMass = document.getElementById("egg-weight-mass").value;
+    var eggMass = (productionRate / 100) * eggWeightMass;
+    document.getElementById("egg-mass-result").innerText = eggMass;
+    document.getElementById("result-egg-mass").style.display = "block";
+}
+
+   </script>
+
+
+</body>
+
+</html>
