@@ -188,19 +188,17 @@ select, input {
 
         <div id="equation-ventilation-change" style="display:none;">
             <h2>حساب التهوية الدنيا بتغيير الهواء</h2>
-            <label for="volume-ventilation">مساحة العنبر (متر مكعب):</label>
+            <label for="volume-ventilation">حجم العنبر (متر مكعب):</label>
             <input type="number" id="volume-ventilation"><br><br>
 
             <label for="fan-capacity">قدرة المروحة (متر مكعب في الدقيقة):</label>
             <input type="number" id="fan-capacity"><br><br>
 
-            <label for="timer-duration">وقت التيمر الكلي (ثوانى):</label>
-            <input type="number" id="timer-duration"><br><br>
-
+           
             <button onclick="calculateVentilationChange()">احسب التهوية</button>
 
             <div class="result" id="result-ventilation-change" style="display:none;">
-                <strong>التهوية الدنيا:</strong> <span id="ventilation-change-result"></span> وقت التشغيل بالثوانى
+                <strong>التهوية الدنيا:</strong> <span id="ventilation-change-result"></span>عدد المراوح المطلوبه
             </div>
         </div>
 		
@@ -501,7 +499,7 @@ select, input {
 
         function calculateVentilationFeed() {
             var feed = document.getElementById("feed-ventilation").value;
-            var ventilation = feed * 120;
+            var ventilation = feed * 120*10;
             document.getElementById("ventilation-feed-result").innerText = ventilation;
             document.getElementById("result-ventilation-feed").style.display = "block";
         }
@@ -519,7 +517,7 @@ select, input {
             var volume = document.getElementById("volume-ventilation").value;
             var fanCapacity = document.getElementById("fan-capacity").value;
             var timerDuration = document.getElementById("timer-duration").value;
-            var ventilation = (volume / 8/fanCapacity) * (timerDuration);
+            var ventilation = (volume / 8/fanCapacity) ;
             document.getElementById("ventilation-change-result").innerText = ventilation;
             document.getElementById("result-ventilation-change").style.display = "block";
         }
