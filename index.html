@@ -516,7 +516,7 @@ select, input {
         function calculateVentilationChange() {
             var volume = document.getElementById("volume-ventilation").value;
             var fanCapacity = document.getElementById("fan-capacity").value;
-            var timerDuration = document.getElementById("timer-duration").value;
+           // var timerDuration = document.getElementById("timer-duration").value;
             var ventilation = (volume / 8/fanCapacity) ;
             document.getElementById("ventilation-change-result").innerText = ventilation;
             document.getElementById("result-ventilation-change").style.display = "block";
